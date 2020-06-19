@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_summernote',
     'accounts',
     'posts',
 ]
@@ -131,3 +132,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # 정적파일 우선탐�
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
