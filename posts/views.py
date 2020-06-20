@@ -15,7 +15,9 @@ def home_view(request):
 #         'post': post,
 #     })
 
+def contact_view(request):
+    return render(request, 'contact.html')
 
-def post_view(request, pk):
-    # post = get_object_or_404(Post, pk)
-    return render(request, 'post.html')
+
+def about_view(request):
+    return render(request, 'about.html')
