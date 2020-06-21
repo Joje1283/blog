@@ -128,9 +128,17 @@ AUTH_USER_MODEL = 'accounts.user'
 # static 경로 지정
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')   # .gitignore에 .static_root디렉토리 추가
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # 정적파일 우선탐색
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # 정적파일 우선탐색
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+EMAIL_BACKEND = secrets['EMAIL_BACKEND']
+EMAIL_HOST = secrets['EMAIL_HOST']
+EMAIL_HOST_USER = secrets['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = secrets['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
