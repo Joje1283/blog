@@ -9,11 +9,12 @@ def home_view(request):
     })
 
 
-# def post_view(request, pk):
-#     post = get_object_or_404(Post, pk)
-#     return render(request, 'post.html', {
-#         'post': post,
-#     })
+def post_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'post_detail.html', {
+        'post': post,
+    })
+
 
 def contact_view(request):
     return render(request, 'contact.html')
@@ -21,3 +22,7 @@ def contact_view(request):
 
 def about_view(request):
     return render(request, 'about.html')
+
+
+def sample_post_view(request):
+    return render(request, 'sample.html')
