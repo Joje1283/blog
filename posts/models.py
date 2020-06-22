@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.CharField(verbose_name='subject', max_length=50)
+    subject = models.CharField(verbose_name='subject', max_length=200)
     content = models.TextField(verbose_name='content')
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
