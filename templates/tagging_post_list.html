@@ -17,33 +17,31 @@
     </header>
 {% endblock %}
 {% block content %}
+    {{ block.super }}
     <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                {% for post in object_list %}
-                    <div class="post-preview">
-                        <a href="{% url 'posts:detail' post.pk %}">
-                            <h2 class="post-title">
-                                {{ post.subject }}
-                            </h2>
-                            <h3 class="post-subtitle">
-                                {{ post.content|safe|striptags|slice:":64" }}
-                            </h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by {{ post.user }}
-                            on {{ post.created|date:"M" }} {{ post.created.day }}, {{ post.created.year }}
-                        </p>
-                    </div>
-                {% endfor %}
-                <!-- Pager -->
-                <div class="clearfix">
-                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% for post in object_list %}
+                <div class="post-preview">
+                    <a href="{% url 'posts:detail' post.pk %}">
+                        <h2 class="post-title">
+                            {{ post.subject }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ post.content|safe|striptags|slice:":64" }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by {{ post.user }}
+                        on {{ post.created|date:"M" }} {{ post.created.day }}, {{ post.created.year }}
+                    </p>
                 </div>
+            {% endfor %}
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
             </div>
         </div>
     </div>
-
     <hr>
 {% endblock %}

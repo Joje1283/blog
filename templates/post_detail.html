@@ -19,30 +19,27 @@
     </header>
 {% endblock %}
 {% block content %}
+    {{ block.super }}
     <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    {{ post.content | safe }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <b>Tags: </b>
-                    {% load tagging_tags %}
-                    {% tags_for_object post as tags %}
-                    {% for tag in tags %}
-                        <a href="{% url 'posts:tagged_object_list' tag.name %}">{{ tag.name }}</a>
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {{ post.content | safe }}
         </div>
-    </article>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <b>Tags: </b>
+            {% load tagging_tags %}
+            {% tags_for_object post as tags %}
+            {% for tag in tags %}
+                <a href="{% url 'posts:tagged_object_list' tag.name %}">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
     <hr>
 {% endblock %}

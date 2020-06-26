@@ -17,13 +17,6 @@ class Post(models.Model):
         return self.subject
 
 
-# class Tag(models.Model):
-#     name = models.CharField(max_length=140, unique=True)
-#
-#     def __str__(self):
-#         return self.name
-
-
 class Contact(models.Model):
     name = models.CharField(verbose_name='name', max_length=50)
     email = models.EmailField(verbose_name='email')
