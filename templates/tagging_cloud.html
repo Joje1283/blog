@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extracss %}
+    <style>
+        .tag-cloud {
+            width: 30%;
+            margin-left: 30px;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid orange;
+            background: #ffc;
+        }
+
+        .tag-1 {font-size: 12px;}
+        .tag-2 {font-size: 14px;}
+        .tag-3 {font-size: 16px;}
+        .tag-4 {font-size: 18px;}
+        .tag-5 {font-size: 20px;}
+        .tag-6 {font-size: 24px;}
+    </style>
+{% endblock %}
+{% block header %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h1>Blog Tag Cloud</h1>
+                        <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block content %}
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto tag-cloud">
+                    {% load tagging_tags %}
+                    {% tag_cloud_for_model posts.Post as tags with steps=6 min_count=1 distribution=log %}
+                    {# posts.Post: 태그를 추출할 대상은 posts앱의 post모델임, as tags: 태그 리스트를 tags라는 변수에 담음 #}
+                    {# with steps=6 min_count=1: 태그 폰트 범위를 1~6, 출력용 최소 사용 횟수를 1로 정함 #}
+                    {# distribution=log:태그 폰트의 크기를 할당할 때 수학 Logarithmic 알고리즘을 사용. #}
+                    {% for tag in tags %}
+                        <span class="tag-{{ tag.font_size }}">
+                        <a href="{% url 'posts:tagged_object_list' tag.name %}">{{ tag.name }} ({{ tag.font_size }})</a>
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+
+    </article>
+    <hr>
+{% endblock %}

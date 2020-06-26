@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from tagging.views import TaggedObjectList
 from .models import Post
 
 
@@ -24,5 +25,11 @@ def about_view(request):
     return render(request, 'about.html')
 
 
-def sample_post_view(request):
-    return render(request, 'sample.html')
+def tag_view(request):
+    return render(request, 'tagging_cloud.html')
+
+
+class PostTaggedObjectList(TaggedObjectList):
+    model = Post
+    template_name = 'tagging_post_list.html'
+

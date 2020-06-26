@@ -1,3 +1,4 @@
 django==3.0.3
 django-extensions
 django-summernote==0.8.11.6
+django-tagging==0.5.0
