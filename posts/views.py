@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from tagging.views import TaggedObjectList
@@ -5,8 +6,17 @@ from .models import Post
 
 
 def home_view(request):
+    paginate_by = 15
     query = request.GET.get('q')
-    posts = Post.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(Post.objects.all(), paginate_by)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
     if query:
         posts = posts.filter(Q(subject__icontains=query) | Q(content__icontains=query))
 
@@ -37,4 +47,5 @@ def tag_view(request):
 class PostTaggedObjectList(TaggedObjectList):
     model = Post
     template_name = 'tagging_post_list.html'
+    paginate_by = 15
 

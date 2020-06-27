@@ -13,6 +13,9 @@ class Post(models.Model):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('-modified',)
+
     def __str__(self):
         return self.subject
 
