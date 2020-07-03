@@ -7,14 +7,8 @@ from .models import Post, Contact# , Tag
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
-    # form = PostForm
 
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     pass
-
-
-# @admin.register(Tag)
-# class TagAdmin(admin.ModelAdmin):
-#     pass
