@@ -9,16 +9,17 @@ def home_view(request):
     paginate_by = 15
     query = request.GET.get('q')
     page = request.GET.get('page', 1)
-    paginator = Paginator(Post.objects.all(), paginate_by)
+    posts = Post.objects.all()
+    if query:
+        posts = posts.filter(Q(subject__icontains=query) | Q(content__icontains=query))
+    paginator = Paginator(posts, paginate_by)
+
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-
-    if query:
-        posts = posts.filter(Q(subject__icontains=query) | Q(content__icontains=query))
 
     return render(request, 'index.html', {
         'posts': posts,
@@ -48,4 +49,3 @@ class PostTaggedObjectList(TaggedObjectList):
     model = Post
     template_name = 'tagging_post_list.html'
     paginate_by = 15
-
